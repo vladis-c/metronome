@@ -13,12 +13,12 @@ const {width, height} = Dimensions.get('window');
 const CENTER_X = width / 2;
 const CENTER_Y = height / 2;
 
-type Props = {
+type PulseProps = {
   trigger: number;
   durationMs: number;
 };
 
-const Pulse = ({trigger, durationMs}: Props) => {
+const Pulse = ({trigger, durationMs}: PulseProps) => {
   const progress = useSharedValue(0);
   const didMount = useRef(false);
 
@@ -58,7 +58,6 @@ export default Pulse;
 
 const styles = StyleSheet.create({
   pulse: {
-    position: 'absolute',
     backgroundColor: 'rgba(0,0,0,0.12)',
   },
 });

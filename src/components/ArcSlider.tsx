@@ -15,19 +15,23 @@ import {
   MIN_BPM,
 } from '../constants';
 
-type Props = {
+type ArcSliderProps = {
   bpm: number;
   onEnd: (bpm: number) => void;
   onChange: (bpm: number) => void;
 };
 
-const ArcSlider = ({bpm, onEnd, onChange}: Props) => {
+const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
   const angle = useSharedValue(bpmToAngle(bpm));
 
   const pan = Gesture.Pan()
     .onUpdate(e => {
       const x = e.x - ARC_RADIUS;
       const y = e.y - ARC_RADIUS;
+
+      if (y > 0) {
+        return;
+      } // to prevent knob going over the left side and jumping to the right
 
       let a = Math.atan2(y, x);
 
