@@ -52,7 +52,7 @@ const Pulse = ({trigger, durationMs}: PulseProps) => {
     };
   });
 
-  return <Animated.View style={[{backgroundColor: colors.blue[100]}, style]} />;
+  return <Animated.View style={[{backgroundColor: colors.tertiary}, style]} />;
 };
 
 export default Pulse;

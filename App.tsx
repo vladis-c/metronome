@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <GestureHandlerRootView>
-      <View style={{flex: 1, backgroundColor: colors.bg.primary}}>
+      <View style={{flex: 1, backgroundColor: colors.primary}}>
         <View
           pointerEvents="none"
           style={{
@@ -31,7 +31,7 @@ const App = () => {
             <Text
               style={{
                 ...typography.h1,
-                color: colors.blue[900],
+                color: colors.text,
                 marginBottom: 24,
               }}>
               {previewBpm} BPM

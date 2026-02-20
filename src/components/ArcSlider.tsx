@@ -78,7 +78,7 @@ const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
                 -Math.PI,
                 0,
               )}
-              stroke={colors.blue[500]}
+              stroke={colors.accent}
               strokeWidth={6}
               fill="none"
               strokeLinecap="round"
@@ -88,7 +88,7 @@ const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
             style={[
               styles.knob,
               knobStyle,
-              {backgroundColor: colors.blue[900], ...shadows.glowBlue},
+              {backgroundColor: colors.secondary, ...shadows.glowBlue},
             ]}
           />
         </View>

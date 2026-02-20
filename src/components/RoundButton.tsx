@@ -10,9 +10,9 @@ type RoundButtonProps = {
 const RoundButton = ({title, onPress}: RoundButtonProps) => {
   return (
     <TouchableOpacity
-      style={[styles.button, {backgroundColor: colors.blue[900]}]}
+      style={[styles.button, {backgroundColor: colors.secondary}]}
       onPress={onPress}>
-      <Text style={[typography.body, {color: colors.blue[100]}]}>{title}</Text>
+      <Text style={[typography.body, {color: colors.text}]}>{title}</Text>
     </TouchableOpacity>
   );
 };
