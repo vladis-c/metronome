@@ -7,6 +7,7 @@ import Animated, {
 import Svg, {Path} from 'react-native-svg';
 import {runOnJS} from 'react-native-worklets';
 import {
+  ANGLE_EPSILON,
   ARC_RADIUS,
   ARC_SIZE,
   KNOB_PATH_OFFSET,
@@ -36,10 +37,10 @@ const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
 
       let a = Math.atan2(y, x);
 
-      if (a > 0) {
+      if (a > 0 - ANGLE_EPSILON) {
         a = 0;
       }
-      if (a < -Math.PI) {
+      if (a < -Math.PI + ANGLE_EPSILON) {
         a = -Math.PI;
       }
 

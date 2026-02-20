@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {StyleProp, StyleSheet, Text, TextStyle, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import ArcSlider from './src/components/ArcSlider';
 import Pulse from './src/components/Pulse';
@@ -28,7 +28,6 @@ const App = () => {
         </View>
         <View style={styles.wrapper}>
           <View style={styles.container}>
-            {/* TODO: styles of text - in tokens */}
             <Text
               style={{
                 ...typography.h1,

@@ -1,5 +1,5 @@
 import {useEffect, useRef} from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
+import {Dimensions} from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,

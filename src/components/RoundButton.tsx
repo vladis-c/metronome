@@ -2,13 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {colors, typography} from '../theme';
 
-const RoundButton = ({
-  title,
-  onPress,
-}: {
+type RoundButtonProps = {
   title: string;
   onPress: () => void;
-}) => {
+};
+
+const RoundButton = ({title, onPress}: RoundButtonProps) => {
   return (
     <TouchableOpacity
       style={[styles.button, {backgroundColor: colors.blue[900]}]}

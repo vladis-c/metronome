@@ -1,1 +1,1 @@
-export const START_BUTTON_Y_OFFSET = -25;
+export const START_BUTTON_Y_OFFSET = -36;
