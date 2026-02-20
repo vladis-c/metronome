@@ -126,8 +126,8 @@ const angleToBpm = (angle: number) => {
   return Math.round(MIN_BPM + t * (MAX_BPM - MIN_BPM));
 };
 
-// TODO: naming
-const polarToCartesian = (cx: number, cy: number, r: number, angle: number) => {
+/** From polar coordinates `radius` and `angle` to `x` and `y` position coordinates */
+const angleToPosition = (cx: number, cy: number, r: number, angle: number) => {
   'worklet';
   return {
     x: cx + r * Math.cos(angle),
@@ -142,8 +142,8 @@ const createArcPath = (
   startAngle: number,
   endAngle: number,
 ) => {
-  const start = polarToCartesian(cx, cy, r, endAngle);
-  const end = polarToCartesian(cx, cy, r, startAngle);
+  const start = angleToPosition(cx, cy, r, endAngle);
+  const end = angleToPosition(cx, cy, r, startAngle);
 
   const largeArcFlag = endAngle - startAngle <= Math.PI ? '0' : '1';
 
