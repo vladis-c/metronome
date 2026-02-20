@@ -5,17 +5,12 @@ import ArcSlider from './src/components/ArcSlider';
 import Pulse from './src/components/Pulse';
 import RoundButton from './src/components/RoundButton';
 import {START_BUTTON_Y_OFFSET} from './src/constants';
-import usePlayer from './src/hooks/usePlayer';
-
-const audio = require('./assets/freesound_community-metronome-85688.mp3');
+import useBeatSoundPlayer from './src/hooks/useBeatSoundPlayer';
 
 const App = () => {
   const [beatCounter, setBeatCounter] = useState(0);
   const {previewBpm, setPreviewBpm, bpm, setBpm, isPlaying, setIsPlaying} =
-    usePlayer({
-      audio,
-      setBeatCounter,
-    });
+    useBeatSoundPlayer({setBeatCounter});
 
   const [pulseXAxis, setPulseXAxis] = useState(0);
 

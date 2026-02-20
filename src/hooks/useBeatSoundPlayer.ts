@@ -1,12 +1,12 @@
-import {AudioSource, setAudioModeAsync, useAudioPlayer} from 'expo-audio';
+import {setAudioModeAsync, useAudioPlayer} from 'expo-audio';
 import {useEffect, useRef, useState} from 'react';
 import {INITIAL_BPM, MINUTE} from '../constants';
 
-const usePlayer = ({
-  audio,
+const audio = require('../../assets/freesound_community-metronome-85688.mp3');
+
+const useBeatSoundPlayer = ({
   setBeatCounter,
 }: {
-  audio: AudioSource;
   setBeatCounter: React.Dispatch<React.SetStateAction<number>>;
 }) => {
   const [bpm, setBpm] = useState(INITIAL_BPM);
@@ -68,4 +68,4 @@ const usePlayer = ({
   return {bpm, setBpm, isPlaying, setIsPlaying, previewBpm, setPreviewBpm};
 };
 
-export default usePlayer;
+export default useBeatSoundPlayer;
