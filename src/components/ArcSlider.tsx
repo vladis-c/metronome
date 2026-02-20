@@ -14,6 +14,7 @@ import {
   MAX_BPM,
   MIN_BPM,
 } from '../constants';
+import {colors, shadows} from '../theme';
 
 type ArcSliderProps = {
   bpm: number;
@@ -76,13 +77,19 @@ const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
                 -Math.PI,
                 0,
               )}
-              stroke="#ddd"
+              stroke={colors.blue[500]}
               strokeWidth={6}
               fill="none"
               strokeLinecap="round"
             />
           </Svg>
-          <Animated.View style={[styles.knob, knobStyle]} />
+          <Animated.View
+            style={[
+              styles.knob,
+              knobStyle,
+              {backgroundColor: colors.blue[900], ...shadows.glowBlue},
+            ]}
+          />
         </View>
       </GestureDetector>
     </View>
@@ -104,7 +111,6 @@ const styles = StyleSheet.create({
     height: ARC_RADIUS,
     borderTopLeftRadius: ARC_RADIUS,
     borderTopRightRadius: ARC_RADIUS,
-    backgroundColor: '#eee',
     overflow: 'hidden',
   },
   knob: {

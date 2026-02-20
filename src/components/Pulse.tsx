@@ -7,6 +7,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {ARC_RADIUS} from '../constants';
+import {colors} from '../theme';
 
 const {width, height} = Dimensions.get('window');
 
@@ -51,13 +52,7 @@ const Pulse = ({trigger, durationMs}: PulseProps) => {
     };
   });
 
-  return <Animated.View style={[styles.pulse, style]} />;
+  return <Animated.View style={[{backgroundColor: colors.blue[100]}, style]} />;
 };
 
 export default Pulse;
-
-const styles = StyleSheet.create({
-  pulse: {
-    backgroundColor: 'rgba(0,0,0,0.12)',
-  },
-});
