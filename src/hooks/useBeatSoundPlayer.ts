@@ -49,6 +49,7 @@ const useBeatSoundPlayer = ({
   };
 
   const stopMetronome = () => {
+    setBeatCounter(0);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;

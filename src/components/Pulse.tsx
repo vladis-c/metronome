@@ -11,15 +11,17 @@ import {colors} from '../theme';
 
 const {width, height} = Dimensions.get('window');
 
-const CENTER_X = width / 2;
-const CENTER_Y = height / 2;
+const DEFAULT_CENTER_X = width / 2;
+const DEFAULT_CENTER_Y = height / 2;
 
 type PulseProps = {
   trigger: number;
   durationMs: number;
+  centerX?: number;
+  centerY?: number;
 };
 
-const Pulse = ({trigger, durationMs}: PulseProps) => {
+const Pulse = ({trigger, durationMs, centerX, centerY}: PulseProps) => {
   const progress = useSharedValue(0);
   const didMount = useRef(false);
 
@@ -38,17 +40,17 @@ const Pulse = ({trigger, durationMs}: PulseProps) => {
   }, [trigger]);
 
   const style = useAnimatedStyle(() => {
-    const radius = progress.value * ARC_RADIUS + 20;
+    const radius = progress.value * ARC_RADIUS;
+    const cx = centerX ?? DEFAULT_CENTER_X;
+    const cy = centerY ?? DEFAULT_CENTER_Y;
 
     return {
+      position: 'absolute',
       width: radius * 2,
       height: radius * 2,
       borderRadius: radius,
       opacity: 1 - progress.value,
-      transform: [
-        {translateX: CENTER_X - radius},
-        {translateY: CENTER_Y - radius},
-      ],
+      transform: [{translateX: cx - radius}, {translateY: cy - radius}],
     };
   });
 

@@ -12,41 +12,41 @@ const App = () => {
   const [beatCounter, setBeatCounter] = useState(0);
   const {previewBpm, setPreviewBpm, bpm, setBpm, isPlaying, setIsPlaying} =
     useBeatSoundPlayer({setBeatCounter});
-  const [pulseXAxis, setPulseXAxis] = useState(0);
+  const [pulseCenter, setPulseCenter] = useState<{x: number; y: number} | null>(
+    null,
+  );
 
   return (
     <GestureHandlerRootView>
-      <View style={{flex: 1, backgroundColor: colors.primary}}>
-        <View
-          pointerEvents="none"
+      <View style={[styles.container, {backgroundColor: colors.primary}]}>
+        <Text
           style={{
-            display: !pulseXAxis ? 'none' : 'flex',
-            position: 'absolute',
-            marginTop: pulseXAxis,
+            ...typography.h1,
+            color: colors.text,
+            marginBottom: 24,
           }}>
-          <Pulse trigger={beatCounter} durationMs={MINUTE / bpm} />
-        </View>
-        <View style={styles.wrapper}>
-          <View style={styles.container}>
-            <Text
-              style={{
-                ...typography.h1,
-                color: colors.text,
-                marginBottom: 24,
-              }}>
-              {previewBpm} BPM
-            </Text>
-            <ArcSlider bpm={bpm} onEnd={setBpm} onChange={setPreviewBpm} />
-            <View
-              style={{top: START_BUTTON_Y_OFFSET}}
-              onLayout={e =>
-                setPulseXAxis(e.nativeEvent.layout.x + START_BUTTON_Y_OFFSET)
-              }>
-              <RoundButton
-                title={isPlaying ? 'Stop' : 'Start'}
-                onPress={() => setIsPlaying(prev => !prev)}
-              />
-            </View>
+          {previewBpm} BPM
+        </Text>
+        <View style={styles.arcContainer}>
+          <ArcSlider bpm={bpm} onEnd={setBpm} onChange={setPreviewBpm} />
+          <View
+            style={styles.button}
+            onLayout={e => {
+              const {x, y, width, height} = e.nativeEvent.layout;
+              setPulseCenter({x: x + width / 2, y: y + height / 2});
+            }}>
+            <RoundButton
+              title={isPlaying ? 'Stop' : 'Start'}
+              onPress={() => setIsPlaying(prev => !prev)}
+            />
+          </View>
+          <View pointerEvents="none" style={styles.pulse}>
+            <Pulse
+              trigger={beatCounter}
+              durationMs={MINUTE / bpm}
+              centerX={pulseCenter?.x}
+              centerY={pulseCenter?.y}
+            />
           </View>
         </View>
       </View>
@@ -57,15 +57,21 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    gap: 16,
+    alignItems: 'center',
   },
-  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
-  row: {
-    flexDirection: 'row',
-    gap: 12,
+  arcContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {marginTop: START_BUTTON_Y_OFFSET, zIndex: 1},
+  pulse: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });

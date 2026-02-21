@@ -14,6 +14,7 @@ import {
   KNOB_SIZE,
   MAX_BPM,
   MIN_BPM,
+  TOUCH_EXTRA,
 } from '../constants';
 import {colors, shadows} from '../theme';
 
@@ -22,6 +23,8 @@ type ArcSliderProps = {
   onEnd: (bpm: number) => void;
   onChange: (bpm: number) => void;
 };
+
+const TOUCH_SIZE = KNOB_SIZE + TOUCH_EXTRA * 2;
 
 const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
   const angle = useSharedValue(bpmToAngle(bpm));
@@ -54,11 +57,11 @@ const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
     const x =
       ARC_RADIUS +
       (ARC_RADIUS + KNOB_PATH_OFFSET) * Math.cos(angle.value) -
-      KNOB_SIZE / 2;
+      TOUCH_SIZE / 2;
     const y =
       ARC_RADIUS +
       (ARC_RADIUS + KNOB_PATH_OFFSET) * Math.sin(angle.value) -
-      KNOB_SIZE / 2;
+      TOUCH_SIZE / 2;
 
     return {
       transform: [{translateX: x}, {translateY: y}],
@@ -86,11 +89,17 @@ const ArcSlider = ({bpm, onEnd, onChange}: ArcSliderProps) => {
           </Svg>
           <Animated.View
             style={[
-              styles.knob,
+              styles.knobWrapper,
+              {width: TOUCH_SIZE, height: TOUCH_SIZE},
               knobStyle,
-              {backgroundColor: colors.secondary, ...shadows.glowBlue},
-            ]}
-          />
+            ]}>
+            <Animated.View
+              style={[
+                styles.knobInner,
+                {backgroundColor: colors.secondary, ...shadows.glowBlue},
+              ]}
+            />
+          </Animated.View>
         </View>
       </GestureDetector>
     </View>
@@ -114,8 +123,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: ARC_RADIUS,
     overflow: 'hidden',
   },
-  knob: {
+  knobWrapper: {
     position: 'absolute',
+    width: KNOB_SIZE,
+    height: KNOB_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  knobInner: {
     width: KNOB_SIZE,
     height: KNOB_SIZE,
     borderRadius: KNOB_SIZE / 2,
